@@ -1,0 +1,28 @@
+{
+	"name": "backend-lt",
+	"version": "0.0.1",
+	"description": "",
+	"author": "",
+	"private": true,
+	"license": "UNLICENSED",
+	"scripts": {
+		"start": "ts-node src/server.ts",
+		"build": "tsc",
+		"serve": "node dist/server.js"
+	},
+	"dependencies": {
+		"@sequelize/sqlite3": "7.0.0-alpha.43",
+		"dotenv": "^16.0.1",
+		"express": "^4.21.2",
+		"http-errors": "^2.0.0",
+		"mailtrap": "^3.4.0",
+		"sequelize": "^6.37.5"
+	},
+	"devDependencies": {
+		"@types/express": "^5.0.0",
+		"@types/http-errors": "^2.0.4",
+		"@types/node": "^22.10.1",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.7.2"
+	}
+}
