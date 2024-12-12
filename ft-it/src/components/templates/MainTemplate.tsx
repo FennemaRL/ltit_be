@@ -1,10 +1,17 @@
 import React from 'react';
+const styles = {
+  main: {
+    margin: '1rem', marginRight: '2.5rem', marginLeft: '2.5rem', display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh'
+  }
 
-const MainTemplate  = ({ children }) => {
+};
+const MainTemplate = ({ children }) => {
   return (
-    <div className="main-template">
-      <main style={{margin:'1rem', marginRight:'2.5rem',marginLeft:'2.5rem'}}>{children}</main>
-      
+    <div>
+      <main style={styles.main}>{children}</main>
     </div>
   );
 };
