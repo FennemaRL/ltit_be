@@ -25,29 +25,29 @@ export class PatientRegistration {
         const domain = patient.email.split('@')[1];
         if ('gmail.com' !== domain) {
             
-          throw new createError.BadRequest(`the patient mail isn't a gmail : ${patient.email}`)
+          throw new createError.BadRequest(`the patient mail isn't a gmail :${patient.email}`)
         }
       }
   
       private validateName(patient: PatientDTO) {
         const containsNumber = Array.from(patient.name).some(char => !isNaN( Number(char)));
         if (containsNumber) {
-            throw new createError.BadRequest (`the patient name contains at least with 1 number ${patient.name}`);
+            throw new createError.BadRequest (`the patient name contains at least with 1 number :${patient.name}`);
         }
       }
   
       private validateNumber(patient: PatientDTO) {
         if (!patient.phoneNumber) {
-            throw new createError.BadRequest(`the patient doesn't contains phone number ${patient.name}`);
+            throw new createError.BadRequest(`the patient doesn't contains phone number :${patient.name}`);
         }
         const isInvalidCharacteristic =isNaN(patient.phoneNumber.countryCharacteristic)
         const isInvalidNUmber = isNaN(patient.phoneNumber.number)
        
         if (isInvalidCharacteristic) {
-            throw new createError.BadRequest( `the patient phone characteristic ${patient.phoneNumber.countryCharacteristic}`);
+            throw new createError.BadRequest( `the patient phone characteristic :${patient.phoneNumber.countryCharacteristic}`);
         }
         if (isInvalidNUmber) {
-            throw new createError.BadRequest(`the patient phone number ${patient.phoneNumber.number}`);
+            throw new createError.BadRequest(`the patient phone number :${patient.phoneNumber.number}`);
         }
       }
   }
