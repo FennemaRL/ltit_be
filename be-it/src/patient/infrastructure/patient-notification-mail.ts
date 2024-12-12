@@ -12,7 +12,6 @@ export class PatientMailNotification implements PatientNotifierInterface {
     const client = new MailtrapClient({ token: TOKEN! });
     const sender = { name: "Mailtrap Test", email: SENDER_EMAIL! };
     //@Technical debt implement retries
-    debugger
     client
       .send({
         from: sender,
