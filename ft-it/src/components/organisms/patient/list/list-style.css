@@ -41,3 +41,14 @@ html,body {
   color: #666;
   margin: 0;
 }
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px solid black;
+  padding: 20px;
+  border-radius: 3px;
+}
