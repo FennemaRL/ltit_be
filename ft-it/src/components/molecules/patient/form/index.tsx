@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import "./form-style.css";
-const PatientForm = ({ onSubmit, initialValues = {} }) => {
+
+//@Technical deb move popup behavior to his own component
+function PatientForm({onSubmit, closePopUp}) {
   const [formData, setFormData] = useState({
-    name: initialValues.name || "",
-    email: initialValues.email || "",
-    address: initialValues.address || "",
+    name:  "",
+    email: "",
+    address:  "",
     phoneNumber: {
-      countryCharacteristic: initialValues.phoneNumber?.countryCharacteristic || 1,
-      number: initialValues.phoneNumber?.number || "",
+      countryCharacteristic: 0,
+      number: 0,
     },
-    photoIdentityDocument: initialValues.photoIdentityDocument || "",
+    photoIdentityDocument: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -29,8 +31,6 @@ const PatientForm = ({ onSubmit, initialValues = {} }) => {
     } else {
       setFormData({ ...formData, [name]: value });
     }
-
-    validateField(name, value);
   };
 
   const validateField = (name, value) => {
@@ -63,24 +63,25 @@ const PatientForm = ({ onSubmit, initialValues = {} }) => {
           error = 'Phone number must be a number';
         }
         break;
-      case 'photoIdentityDocument':
-        if (!value || !/^https?:\/\/.*\.(jpg|jpeg|png)$/.test(value)) {
-          //error = 'Invalid photo ID URL (must be a valid image URL)';
-        }
-        break;
       default:
         break;
     }
-    setErrors({ ...errors, [name]: error });
+    setErrors(prevErrors =>({ ...prevErrors, [name]: error }));
   };
 
   const handleSubmit = (event) => {
+
     event.preventDefault();
+    Object.keys(formData).forEach(attribute  => validateField(attribute,formData[attribute]))
     onSubmit(formData); // Pass the form data to the parent component
   };
+  
 
   return (
-    <form onSubmit={handleSubmit} className='patient-form'>
+    <form onSubmit={handleSubmit} className="contact-form">
+      <div className="close-button" onClick={()=>closePopUp()}>&times;</div>
+      <h2>Submit Patient Information</h2>
+      <p>Please write following patient information: </p>
       <div>
         <label htmlFor="name">Name:</label>
         <input
@@ -138,20 +139,9 @@ const PatientForm = ({ onSubmit, initialValues = {} }) => {
         {errors.phoneNumber?.number && <p className="error">{errors.phoneNumber?.number}</p>}
         
       </div>
-      <div>
-        <label htmlFor="photoIdentityDocument">Photo ID URL:</label>
-        <input
-          type="url"
-          id="photoIdentityDocument"
-          name="photoIdentityDocument"
-          value={formData.photoIdentityDocument}
-          onChange={handleChange}
-        />
-        {errors.photoIdentityDocument && <p className="error">{errors.photoIdentityDocument}</p>}
-      </div>
-      <button type="submit" disabled= {Object.keys(errors).some(e=>errors[e])}>Submit</button>
+      <button type="submit" className='submit' >Submit</button>
     </form>
   );
-};
+}
 
 export default PatientForm;

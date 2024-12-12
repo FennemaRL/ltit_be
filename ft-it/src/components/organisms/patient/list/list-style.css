@@ -13,8 +13,14 @@ html,body {
   border-radius: 4px;
   border-bottom: 2px solid white !important;
   color:white;
+  display: flex;
+  justify-content: space-between;
   & p {
     font-size: 26px;
+  }
+  & .register:hover {
+    cursor: pointer;
+    fill: white;
   }
 }
 .card-list {
@@ -38,7 +44,7 @@ html,body {
 
 .no-content-message {
   font-size: 18px;
-  color: #666;
+  color: white;
   margin: 0;
 }
 
